@@ -1,0 +1,77 @@
+@media screen and (max-width: 600px) {
+  .widgets {
+    margin-bottom: 40px;
+  }
+}
+
+.widgets {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  border: 0.5px solid rgba(99, 99, 99, 0.253);
+  color: #666666;
+  outline: none;
+  padding: 17px 12px;
+  height: fit-content;
+}
+
+.widgets .heading {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.widgets .heading p {
+  color: #000;
+  font-weight: bold;
+}
+
+.widgets .suggested__accounts {
+  width: 90%;
+  margin: auto;
+}
+
+.widgets .account {
+  display: flex;
+}
+
+.widgets .account p {
+  margin-bottom: 8px;
+}
+
+.widgets .account .avatar {
+  margin-left: -3px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.widgets .name {
+  color: #000;
+}
+
+.widgets .desc {
+  line-height: 19px;
+  font-size: 0.77rem;
+  margin-top: -7px;
+}
+
+.widgets .account .follow__btn {
+  padding: 0 14px 3px 14px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid rgba(99, 99, 99, 0.507);
+  border-radius: 20px;
+}
+
+.widgets .recommendations {
+  font-weight: bold;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  text-align: center;
+}

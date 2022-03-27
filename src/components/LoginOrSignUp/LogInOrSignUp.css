@@ -1,0 +1,140 @@
+.loginorsignup {
+  background-color: white;
+  height: fit-content;
+}
+
+.liosu__header {
+  height: 70px;
+  padding-bottom: 0;
+  padding-top: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 1030px) {
+  .liosu__header {
+    display: flex;
+  }
+}
+
+.liosu__header .main__logo {
+  height: auto;
+  width: 180px;
+}
+
+.liosu__header .header__left {
+  margin-right: 10%;
+}
+
+.liosu__header .header__left img {
+  object-fit: cover;
+  height: auto;
+  width: 100%;
+  margin-right: 9px;
+}
+
+.liosu__header .header__right {
+  width: fit-content;
+}
+
+@media screen and (max-width: 1030px) {
+  .liosu__header .header__right {
+    width: fit-content;
+  }
+}
+
+.liosu__header .header__right .line {
+  width: 1px;
+  height: 100%;
+  background-color: #6c6c6c;
+}
+
+.liosu__header .header__right .liosu__buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.liosu__header .header__right .signup__btn {
+  color: #6c6c6c;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.liosu__header .header__right .signup__btn:hover {
+  background-color: #92929231;
+}
+
+.liosu__header .header__right .login__btn {
+  color: #0d68c3;
+  font-size: 1.2rem;
+  font-weight: bold;
+  vertical-align: bottom;
+  border-radius: 25px;
+  border: #0d68c3 solid 1.5px;
+  padding: 8px 16px;
+}
+
+.liosu__header .header__right .login__btn:hover {
+  background-color: #1179e042;
+}
+
+.liosu__body {
+  display: flex;
+  margin-top: 78px;
+  padding-left: 8.5%;
+  gap: 100px;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 700px) {
+  .liosu__body {
+    flex-direction: column;
+  }
+}
+
+.liosu__body .content {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  gap: 50px;
+}
+
+.liosu__body .content .welcome {
+  color: #90594a;
+  font-size: 3.5rem;
+  font-weight: 220;
+  margin-left: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .liosu__body .content .welcome {
+    font-size: 2rem;
+  }
+}
+
+.liosu__body .content .buttons {
+  width: 100%;
+}
+
+.liosu__body .content .button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 17px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.liosu__body .content .job__search p,
+.liosu__body .content .skill__search p {
+  color: #9965d5;
+}
+
+.liosu__body .content .button:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}

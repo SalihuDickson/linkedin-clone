@@ -1,0 +1,138 @@
+@media screen and (max-width: 764px) {
+  .feed {
+    margin-bottom: 28px;
+  }
+}
+
+.createPosts {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 115px;
+  width: 100%;
+  border-radius: 10px;
+  border: 0.5px solid rgba(99, 99, 99, 0.253);
+}
+
+.createPosts__text {
+  height: 46px;
+  width: 94.8%;
+  margin: auto;
+  display: flex;
+  align-content: center;
+}
+
+.createPosts__avatar {
+  font-size: 200px;
+  margin-right: 8px;
+}
+
+.feed .createPosts .input {
+  height: 47px;
+  width: 460px;
+  border-radius: 25px;
+  outline: none;
+  border: 0.3px solid rgba(99, 99, 99, 0.507);
+  padding-left: 16px;
+  font-weight: bold;
+  color: #747474;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.feed .createPosts .input:hover {
+  background-color: rgba(155, 155, 155, 0.11);
+}
+
+.feed .icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-left: 27px;
+  margin-bottom: 16px;
+  width: 90%;
+}
+
+.feed__icon {
+  display: flex;
+  gap: 10px;
+  color: #747474;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.sort__posts {
+  display: flex;
+  align-items: center;
+}
+
+.sort__posts span {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.sort__posts .line {
+  width: 79%;
+  height: 1px;
+  background-color: #74747498;
+  margin: 14px 7px 14px 2px;
+}
+
+@media screen and (max-width: 1200px) {
+  .sort__posts .line {
+    width: 76%;
+  }
+}
+
+@media screen and (max-width: 764px) {
+  .sort__posts .line {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .sort__posts .line {
+    width: 73%;
+  }
+}
+
+.sort__posts .sort__text {
+  font-size: 0.8rem;
+  color: #747474;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sort__posts .sort__text .sort {
+  color: #000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.sort__posts .sort {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.sort__posts .sort__options {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: -2px;
+  top: 26px;
+  min-width: 160px;
+  padding: 12px 16px;
+  z-index: 1;
+  border-top-right-radius: 0;
+}
+
+.sort__options .option {
+  line-height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+}

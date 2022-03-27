@@ -1,0 +1,29 @@
+/* header, header__left, header__right & nav__icon have styles in "App.css" as they are considered global styles */
+
+.header__left img,
+.header__right img {
+  object-fit: contain;
+  height: 34px;
+  margin-right: 9px;
+}
+
+.header__search {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  border-radius: 5px;
+  height: 34px;
+  width: 278px;
+  color: gray;
+  background-color: #eef3f8;
+}
+
+.header__search-icon {
+  margin-right: 4.8px;
+}
+
+.header__search > input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}

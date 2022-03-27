@@ -1,0 +1,109 @@
+.post {
+  background-color: #fff;
+  color: #747474;
+  font-size: 0.85rem;
+  padding: 12px 16px;
+  margin-bottom: 5px;
+}
+
+.post .post__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post .post__account {
+  display: flex;
+  align-items: flex-start;
+}
+
+.post__account .info {
+  margin-left: 5px;
+  margin-top: 2.5px;
+}
+
+.post__account .name {
+  color: #000;
+  margin-bottom: 2px;
+}
+
+.post__account .time__posted {
+  display: flex;
+  align-items: center;
+}
+
+.post__account .time__posted p {
+  margin-right: 3px;
+}
+
+.post__content {
+  margin-top: 8px;
+  margin-bottom: 23px;
+}
+
+.post__content p {
+  color: #000;
+  padding: 0 3px;
+}
+
+.post .icons {
+  margin-bottom: 0;
+}
+
+.post__icons .feed__icon {
+  gap: 6.5px;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.like__count,
+.comment__count {
+  position: absolute;
+  right: 31px;
+  bottom: -5px;
+  color: white;
+  background-color: red;
+  padding: 2.5px;
+  border-radius: 100%;
+  font-size: 0.6rem;
+  z-index: 2;
+}
+
+.comment__count {
+  right: 74px;
+}
+
+.post .more {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 100%;
+  height: fit-content;
+  padding: 2.5px 4px;
+}
+
+.post .more:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.post .more__content {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: -14.5px;
+  min-width: 160px;
+  padding: 12px 16px;
+  z-index: 1;
+  border-top-right-radius: 0;
+  margin-top: 5px;
+}
+
+.post .more__content .more__icon {
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.more__icon p {
+  margin-left: 6.2px;
+  font-weight: bold;
+}

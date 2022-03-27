@@ -1,39 +1,124 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-size: 16px;
+  background-color: #f3f2ef;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
+/* some global styles for all headers */
+header {
+  display: flex;
+  padding: 10px 9.55vw;
+  height: 52px;
+  background-color: #ffff;
+}
+
+@media screen and (max-width: 1030px) {
+  header {
+    width: 100%;
+    padding: 8px 8% 10px 8%;
+    display: block;
   }
 }
 
-.App-header {
-  min-height: 100vh;
+@media screen and (max-width: 768px) {
+  header {
+    padding: 8px 4% 10px 4%;
+  }
+}
+
+.header__left {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 11%;
+  width: 55%;
+}
+
+@media screen and (max-width: 1340px) {
+  .header__right {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* some global styles for all nav icons (they are all in header elements)*/
+
+.nav__icon {
+  width: 79px;
+  height: 100%;
+  color: #747474;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  gap: 7px;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.nav__icon .icon {
+  font-size: 1.5rem;
+  margin-bottom: -5px;
+  margin-top: -4px;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
+@media screen and (max-width: 640px) {
+  .nav__icon .icon {
+    font-size: 1.5rem;
   }
-  50% {
-    transform: translateY(10px);
+}
+
+.nav__icon p {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 810px) {
+  .nav__icon p {
+    display: none;
   }
-  100% {
-    transform: translateY(0px);
-  }
+}
+
+.nav__icon .active {
+  color: #0000;
+}
+
+.nav__icon .active::after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #0000;
+}
+
+.pointer__cursor {
+  cursor: pointer;
+}
+
+/* some gloobal styles for input elements */
+input {
+  height: 47px;
+  width: 460px;
+  border-radius: 25px;
+  outline: none;
+  border: 0.3px solid rgba(99, 99, 99, 0.507);
+  padding-left: 16px;
+  font-weight: bold;
+}
+
+/* gloal styles for buttons that have no functionality */
+.no__functionality {
+  color: #d3d3d3 !important;
+  cursor: no-drop;
 }

@@ -1,0 +1,90 @@
+.create__post {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+
+.create__post form {
+  background-color: #fff;
+  width: 550px;
+  height: fit-contentw;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 20px;
+  z-index: 20;
+  padding: 20px;
+}
+
+@media screen and (max-width: 560px) {
+  .create__post form {
+    width: 100%;
+  }
+}
+
+.create__post form .heading {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #000;
+  padding-bottom: 15px;
+  border-bottom: 0.5px solid rgba(119, 119, 119, 0.164);
+}
+
+.create__post .avatar {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  margin: 15px;
+  font-size: 1.1rem;
+  gap: 10px;
+  color: #000;
+  margin-left: 0;
+}
+
+.create__post .post {
+  min-height: 120px;
+  cursor: text;
+}
+
+.create__post textarea {
+  width: 100%;
+  outline: none;
+  color: #000;
+  font-size: 0.9rem;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.create__post .footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create__post .create__post-icons {
+  width: fit-content;
+  margin-left: 0;
+  gap: 30px;
+  align-items: flex-end;
+  color: #666666;
+}
+
+.create__post .footer button {
+  padding: 10px 18px;
+  border: none;
+  outline: none;
+  cursor: no-drop;
+  border-radius: 25px;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  color: #6e6e6eb9;
+}

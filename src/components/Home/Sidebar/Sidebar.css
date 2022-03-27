@@ -1,0 +1,118 @@
+@media screen and (max-width: 764px) {
+  .sidebar {
+    margin-bottom: 28px;
+  }
+}
+.sidebar__icon {
+  margin-right: 7px;
+  color: #666666;
+}
+
+.connection .sidebar__icon {
+  color: #000;
+}
+
+.main__section {
+  background-color: #ffff;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  border: 0.5px solid rgba(99, 99, 99, 0.253);
+}
+
+.main__section .banner__img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.secondary__section {
+  background-color: #ffff;
+  border-radius: 10px;
+  border: 0.5px solid rgba(99, 99, 99, 0.253);
+}
+
+section:not(:last-child) {
+  border-bottom: 0.5px solid rgba(119, 119, 119, 0.164);
+}
+
+section p {
+  display: flex;
+  align-items: center;
+}
+
+section p:last-child {
+  color: #000;
+  font-weight: bold;
+}
+
+section .banner__img {
+  height: 56px;
+  width: 100%;
+  background-size: contain;
+  border-radius: 10px 10px 0 0;
+}
+
+.personal {
+  height: 158px;
+}
+
+.avatar {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.sidebar__avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  padding-bottom: 5px;
+  margin-top: 11.5px;
+}
+
+.name {
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.job__desc {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.text {
+  padding: 7px 0;
+  font-size: 0.8rem;
+  line-height: 18px;
+}
+
+.content {
+  padding: 7px 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 22px;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: #3d86ce;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
