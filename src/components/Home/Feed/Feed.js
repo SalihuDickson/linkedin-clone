@@ -1,5 +1,5 @@
 import "./Feed.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual";
 import YouTubeIcon from "@material-ui/icons/YouTube";
@@ -11,13 +11,28 @@ import { postsRef, postsQuery } from "../../../firebase";
 import { onSnapshot, addDoc, serverTimestamp } from "@firebase/firestore";
 import { useSelector } from "react-redux";
 import useClickedOutside from "../../../hooks/useClickedOutside";
+import CloseIcon from "@material-ui/icons/Close";
 import CreatePost from "./CreatePost/CreatePost";
 
 const Feed = () => {
+  const photoRef = useRef();
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const [enterSrcVisible, setEnterSrcVisible] = useState(false);
   const [sortVisible, setSortVisible, sortRef] = useClickedOutside(false);
-  const [createVisible, setCreateVisible, createRef] = useClickedOutside(false);
+  const [createVisible, setCreateVisible, createRef, createClickable] =
+    useClickedOutside(false);
+  const [imageSrc, setImageSrc] = useState("");
+
+  useEffect(() => {
+    if (!createVisible) {
+      setImageSrc("");
+      document.querySelector("html").style.overflow = "scroll";
+    } else if (createVisible) {
+      window.scrollTo(0, 0);
+      document.querySelector("html").style.overflow = "hidden";
+    }
+  }, [createVisible]);
 
   useEffect(() => {
     let isMounted = true;
@@ -46,12 +61,17 @@ const Feed = () => {
           <CreatePost
             createRef={createRef}
             setCreateVisible={setCreateVisible}
+            createClickable={createClickable}
+            setImgSrc={setImageSrc}
+            imgSrc={imageSrc}
+            enterSrcVisible={enterSrcVisible}
+            setEnterSrcVisible={setEnterSrcVisible}
           />
         )}
         <div className="createPosts__text">
           <Avatar
             className="avatar createPosts__avatar"
-            style={{ textAlign: "center", verticalAlign: "center" }}
+            style={{ textAlign: "center", fontSize: 20 }}
           >
             {user.name[0]}
           </Avatar>
@@ -66,11 +86,29 @@ const Feed = () => {
           </div>
         </div>
         <div className="create__post-icons icons">
-          <div className="feed__icon">
+          <div className="feed__icon" onClick={() => photoRef.current.click()}>
+            <input
+              type="file"
+              onChange={(e) => {
+                setImageSrc(e.target.files[0]);
+                setCreateVisible(true);
+              }}
+              name=""
+              id=""
+              accept="image/*"
+              ref={photoRef}
+              style={{ display: "none" }}
+            />
             <PhotoSizeSelectActualIcon style={{ color: "#70b5f9" }} />
             <p>Photo</p>
           </div>
-          <div className="feed__icon">
+          <div
+            className="feed__icon"
+            onClick={() => {
+              setCreateVisible(true);
+              setEnterSrcVisible(true);
+            }}
+          >
             <YouTubeIcon style={{ color: "#7fc15e" }} />
             <p>Video</p>
           </div>
@@ -109,15 +147,32 @@ const Feed = () => {
 
       <div className="posts">
         {posts.map(
-          ({ id, data: { userId, name, jobDesc, postText, avatar } }) => (
+          ({
+            id,
+            data: {
+              userId,
+              name,
+              jobDesc,
+              postText,
+              imgSrc,
+              videoSrc,
+              avatar,
+              likes,
+              comments,
+            },
+          }) => (
             <Post
               key={id}
               postId={id}
               userId={userId}
               name={name}
               jobDesc={jobDesc}
-              postText={postText}
+              imgSrc={imgSrc}
+              videoSrc={videoSrc}
+              text={postText}
               avatar={avatar}
+              likes={likes}
+              comments={comments}
             />
           )
         )}

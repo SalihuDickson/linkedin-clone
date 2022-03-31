@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 html {
@@ -120,5 +121,5 @@ input {
 /* gloal styles for buttons that have no functionality */
 .no__functionality {
   color: #d3d3d3 !important;
-  cursor: no-drop;
+  cursor: no-drop !important;
 }

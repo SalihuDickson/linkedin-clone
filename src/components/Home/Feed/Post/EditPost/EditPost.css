@@ -8,24 +8,24 @@
   z-index: 10;
 }
 
-.edit__post form {
+.edit__post .post__box {
   background-color: #fff;
   width: 550px;
-  height: fit-contentw;
+  height: fit-content;
   margin: auto;
   margin-top: 50px;
   border-radius: 20px;
   z-index: 20;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
 }
 
 @media screen and (max-width: 560px) {
-  .edit__post form {
+  .edit__post .post__box {
     width: 100%;
   }
 }
 
-.edit__post form .heading {
+.edit__post .post__box .heading {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -34,6 +34,13 @@
   color: #000;
   padding-bottom: 15px;
   border-bottom: 0.5px solid rgba(119, 119, 119, 0.164);
+}
+
+.edit__post form {
+  overflow-y: scroll;
+  max-height: 350px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .edit__post .avatar {
@@ -60,7 +67,43 @@
   border: none;
   resize: none;
   overflow: hidden;
+}
+
+.edit__post .preview {
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
   margin-bottom: 10px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.edit__post .preview img {
+  width: 100%;
+  max-height: 690px;
+  object-fit: contain;
+}
+
+.edit__post .preview .options {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  display: flex;
+  gap: 5px;
+}
+
+.edit__post .preview .options .option {
+  background-color: rgba(0, 0, 0, 0.68);
+  color: #fff;
+  width: fit-content;
+  padding: 4.5px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.edit__post .preview .options .option:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .edit__post .footer {
@@ -70,11 +113,13 @@
   align-items: center;
 }
 
-.edit__post .editPosts__icons {
+.edit__post .edit__post-icons {
   width: fit-content;
   margin-left: 0;
   gap: 30px;
   align-items: flex-end;
+  color: #666666;
+  display: flex;
 }
 
 .edit__post .footer button {
@@ -86,4 +131,52 @@
   font-weight: bolder;
   font-size: 1.1rem;
   color: #6e6e6eb9;
+}
+
+.edit__post .enter__src {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 21;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.edit__post .enter__src form {
+  width: 600px;
+  margin: auto;
+  background-color: rgba(245, 245, 245);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  gap: 10px;
+  border-radius: 10px;
+  position: relative;
+  margin: auto;
+  margin-top: 250px;
+}
+
+.edit__post .enter__src form .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.edit__post .enter__src .input {
+  background-color: rgb(250, 249, 249);
+}
+
+.edit__post .enter__src .input:hover,
+.edit__post .enter__src .input:focus {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 605px) {
+  .edit__post .enter__src form {
+    width: 100%;
+  }
 }

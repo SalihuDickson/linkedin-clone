@@ -7,29 +7,75 @@ import CloseIcon from "@material-ui/icons/Close";
 import PhotoSizeSelectActualIcon from "@material-ui/icons/PhotoSizeSelectActual";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
+import EditIcon from "@material-ui/icons/Edit";
 import { useSelector } from "react-redux";
 import { postsRef } from "../../../../firebase";
-
-const CreatePosts = ({ createRef, setCreateVisible }) => {
+import ReactPlayer from "react-player";
+const CreatePosts = ({
+  createRef,
+  setCreateVisible,
+  createClickable,
+  imgSrc,
+  setImgSrc,
+  enterSrcVisible,
+  setEnterSrcVisible,
+}) => {
   const textAreaRef = useRef();
+  const photoRef = useRef();
+  const srcInputRef = useRef();
   const [input, setInput] = useState("");
+  const [srcInput, setSrcInput] = useState("");
+
+  const [image, setImage] = useState("");
+  const [videoSrc, setVideoSrc] = useState("");
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     textAreaRef.current.focus();
-    window.scrollTo(0, 0);
-    document.querySelector("html").style.overflow = "hidden";
   }, []);
+
+  useEffect(() => {
+    if (!enterSrcVisible) {
+      textAreaRef.current.focus();
+      setSrcInput("");
+    } else srcInputRef.current.focus();
+  }, [enterSrcVisible]);
+
+  useEffect(() => {
+    if (imgSrc.size >= 1048487) {
+      alert("The size of your file is greater than 1mb please choose another");
+      setImgSrc(videoSrc);
+    } else if (imgSrc) {
+      const reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        setImage(reader.result);
+      });
+
+      reader.readAsDataURL(imgSrc);
+    } else if (!imgSrc) {
+      setImage("");
+    }
+  }, [imgSrc]);
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
+    textAreaRef.current.focus();
+
+    if (!!!input.trim() && !image && !videoSrc) {
+      return;
+    }
 
     addDoc(postsRef, {
       userId: user.uid,
       name: user.name,
       jobDesc: user.jobDesc,
-      postText: input,
+      postText: input || null,
+      imgSrc: imgSrc ? image : null,
+      videoSrc: videoSrc || null,
       avatar: "",
+      likes: [],
+      comments: [],
       timestamp: serverTimestamp(),
     }).catch((err) => {
       console.log(err);
@@ -37,50 +83,166 @@ const CreatePosts = ({ createRef, setCreateVisible }) => {
     });
 
     setCreateVisible(false);
-    document.querySelector("html").style.overflow = "scroll";
-
     setInput(" ");
+  };
+
+  const isValidUrl = (str) => {
+    const urlPattern = new RegExp(
+      "^(https?:\\/\\/)?" + // protocol
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    ); // fragment locator
+
+    return !!urlPattern.test(str);
+  };
+
+  const handleSrcSubmit = (e) => {
+    e.preventDefault();
+    if (!isValidUrl(srcInput)) {
+      alert("This is not a valid url please review it an try again");
+      return;
+    }
+
+    setVideoSrc(srcInput);
+    setEnterSrcVisible(false);
   };
 
   return (
     <div className="create__post">
-      <form ref={createRef} onSubmit={handlePostSubmit}>
+      {enterSrcVisible && (
+        <div className="enter__src" ref={createClickable}>
+          <form action="" onSubmit={handleSrcSubmit}>
+            <div className="close" onClick={() => setEnterSrcVisible(false)}>
+              <CloseIcon />
+            </div>
+            <p>Enter the Video URL</p>
+            <input
+              type="text"
+              className="input"
+              ref={srcInputRef}
+              value={srcInput}
+              spellCheck="false"
+              style={!isValidUrl(srcInput) ? { color: "#FF0000" } : null}
+              onChange={(e) => setSrcInput(e.target.value)}
+            />
+          </form>
+        </div>
+      )}
+      <div className="post__box" ref={createRef}>
         <div className="heading">
           <p>Create Post</p>
           <CloseIcon
             onClick={() => {
               setCreateVisible(false);
-              document.querySelector("html").style.overflow = "scroll";
             }}
             style={{ fontSize: 32, color: "#6e6e6e", cursor: "pointer" }}
           />
         </div>
-        <div className="avatar">
-          <Avatar style={{ height: 55, width: 55 }}>
-            {!user.avatar && user.name[0]}
-          </Avatar>
-          <p className="name">{user.name}</p>
-        </div>
-        <div className="post" onClick={() => textAreaRef.current.focus()}>
-          <textarea
-            ref={textAreaRef}
-            value={input}
-            onChange={(e) => {
-              e.target.style.height = "0px";
-              e.target.style.height = e.target.scrollHeight + "px";
-              setInput(e.target.value);
-            }}
-          ></textarea>
-        </div>
+
+        <form onSubmit={handlePostSubmit}>
+          <div className="avatar">
+            <Avatar style={{ textAlign: "center", verticalAlign: "center" }}>
+              {user.name[0]}
+            </Avatar>
+            <p className="name">{user.name}</p>
+          </div>
+          <div className="post" onClick={() => textAreaRef.current.focus()}>
+            <textarea
+              placeholder="what do you want to talk about"
+              ref={textAreaRef}
+              value={input}
+              onChange={(e) => {
+                e.target.style.height = "0px";
+                e.target.style.height = e.target.scrollHeight + "px";
+                setInput(e.target.value);
+              }}
+            ></textarea>
+          </div>
+
+          {(videoSrc || imgSrc) && (
+            <div className="preview">
+              <div className="options">
+                <div
+                  className="option"
+                  onClick={() => {
+                    imgSrc
+                      ? photoRef.current.click()
+                      : videoSrc && setEnterSrcVisible(true);
+                  }}
+                >
+                  <EditIcon />
+                </div>
+                <div
+                  className="option"
+                  onClick={() => {
+                    setImgSrc("");
+                    setVideoSrc("");
+                  }}
+                >
+                  <CloseIcon />
+                </div>
+              </div>
+              {videoSrc && (
+                <ReactPlayer
+                  width="480px"
+                  url={videoSrc}
+                  onError={() => {
+                    setVideoSrc("");
+                    alert(
+                      "The url you entered is invalid please enter another"
+                    );
+                    setEnterSrcVisible(true);
+                  }}
+                />
+              )}
+              {imgSrc && (
+                <img
+                  src={image}
+                  alt="Image Preview"
+                  className="image__preview"
+                />
+              )}
+            </div>
+          )}
+        </form>
+
         <div className="footer">
           <div className="create__post-icons icons">
-            <div className="create__icon">
+            <div
+              className="create__icon"
+              onClick={() => {
+                !imgSrc && !videoSrc && photoRef.current.click();
+              }}
+              className={(imgSrc || videoSrc) && "no__functionality"}
+            >
+              <input
+                type="file"
+                onChange={(e) => {
+                  setImgSrc(e.target.files[0]);
+                }}
+                name=""
+                id=""
+                accept="image/*"
+                ref={photoRef}
+                style={{ display: "none" }}
+              />
               <PhotoSizeSelectActualIcon fontSize="large" />
             </div>
-            <div className="create__icon">
+            <div
+              className="create__icon"
+              className={(imgSrc || videoSrc) && "no__functionality"}
+              onClick={() => !videoSrc && !imgSrc && setEnterSrcVisible(true)}
+            >
               <YouTubeIcon fontSize="large" />
             </div>
-            <div className="create__icon">
+            <div
+              className="create__icon"
+              className={imgSrc && "no__functionality"}
+            >
               <NoteAddIcon fontSize="large" />
             </div>
           </div>
@@ -88,7 +250,7 @@ const CreatePosts = ({ createRef, setCreateVisible }) => {
           <button
             type="submit"
             style={
-              input
+              !!input.trim() || imgSrc || videoSrc
                 ? {
                     backgroundColor: "#0d68c3",
                     color: "#fff",
@@ -100,7 +262,7 @@ const CreatePosts = ({ createRef, setCreateVisible }) => {
             Post
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

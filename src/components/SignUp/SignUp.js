@@ -22,16 +22,37 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = (e) => {
+  const isValidString = (string) => {
+    return !!string.trim();
+  };
+
+  const hanleInfoCleanUpAndSubmit = (e) => {
     e.preventDefault();
 
+    if (!isValidString(name)) {
+      alert("please enter a valid name and try again");
+      return;
+    } else if (!isValidString(jobDesc)) {
+      alert("please enter a valid job description and try again");
+      return;
+    }
+
+    let temp = name.trim();
+    temp = temp.split(" ");
+    let properName = temp.map((word) => word[0].toUpperCase() + word.slice(1));
+    setName(properName.join(" "));
+
+    handleSignUp(properName.join(" "));
+  };
+
+  const handleSignUp = (properName) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((cred) => {
-        updateProfile(cred.user, { displayName: name })
+        updateProfile(cred.user, { displayName: properName })
           .then(() => {
             dispatch(
               login({
-                name: name,
+                name: properName,
                 uid: cred.user.uid,
                 jobDesc: jobDesc,
                 email: email,
@@ -48,7 +69,7 @@ const SignUp = () => {
           });
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       })
       .finally(() => {
         setPassword("");
@@ -66,7 +87,7 @@ const SignUp = () => {
         <h1>Make the most of your professional life</h1>
       </header>
       <div className="content">
-        <form className="signup__form" onSubmit={handleSignUp}>
+        <form className="signup__form" onSubmit={hanleInfoCleanUpAndSubmit}>
           <input
             type="text"
             placeholder="Name"

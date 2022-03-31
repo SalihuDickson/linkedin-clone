@@ -5,6 +5,7 @@ main {
   margin: auto;
   margin-top: 23px;
   gap: 22px;
+  height: 100vh;
 }
 
 @media screen and (max-width: 1200px) {

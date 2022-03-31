@@ -2,13 +2,13 @@
   background-color: #fff;
   color: #747474;
   font-size: 0.85rem;
-  padding: 12px 16px;
   margin-bottom: 5px;
 }
 
 .post .post__top {
   display: flex;
   justify-content: space-between;
+  padding: 15px 16px;
 }
 
 .post .post__account {
@@ -36,40 +36,52 @@
 }
 
 .post__content {
-  margin-top: 8px;
+  margin-top: 5px;
   margin-bottom: 23px;
 }
 
-.post__content p {
+.post__content .post__text {
   color: #000;
-  padding: 0 3px;
+  padding: 0 16px;
+}
+
+.post__content .post__media {
+  margin: auto;
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post__media img {
+  width: 100%;
+  max-height: 690px;
+  object-fit: contain;
+}
+
+.avatar__group {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  border-bottom: 0.5px solid rgba(99, 99, 99, 0.253);
+  padding: 0 16px 5px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  height: fit-content;
 }
 
 .post .icons {
   margin-bottom: 0;
+  padding: 15px 16px;
 }
 
 .post__icons .feed__icon {
   gap: 6.5px;
   margin-bottom: 0;
   position: relative;
-}
-
-.like__count,
-.comment__count {
-  position: absolute;
-  right: 31px;
-  bottom: -5px;
-  color: white;
-  background-color: red;
-  padding: 2.5px;
-  border-radius: 100%;
-  font-size: 0.6rem;
-  z-index: 2;
-}
-
-.comment__count {
-  right: 74px;
+  cursor: pointer;
 }
 
 .post .more {

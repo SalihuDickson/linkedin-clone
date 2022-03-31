@@ -29,7 +29,7 @@
 
 .feed .createPosts .input {
   height: 47px;
-  width: 460px;
+  width: 100%;
   border-radius: 25px;
   outline: none;
   border: 0.3px solid rgba(99, 99, 99, 0.507);
@@ -52,6 +52,7 @@
   margin-left: 27px;
   margin-bottom: 16px;
   width: 90%;
+  cursor: pointer;
 }
 
 .feed__icon {
