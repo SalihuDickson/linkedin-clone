@@ -59,10 +59,12 @@ const CreatePosts = ({
   }, [imgSrc]);
 
   const handlePostSubmit = (e) => {
+    console.log("there");
     e.preventDefault();
     textAreaRef.current.focus();
 
     if (!!!input.trim() && !image && !videoSrc) {
+      console.log("leaving");
       return;
     }
 
@@ -213,11 +215,12 @@ const CreatePosts = ({
         <div className="footer">
           <div className="create__post-icons icons">
             <div
-              className="create__icon"
+              className={`${
+                (imgSrc || videoSrc) && "no__functionality"
+              } create__icon`}
               onClick={() => {
                 !imgSrc && !videoSrc && photoRef.current.click();
               }}
-              className={(imgSrc || videoSrc) && "no__functionality"}
             >
               <input
                 type="file"
@@ -233,22 +236,23 @@ const CreatePosts = ({
               <PhotoSizeSelectActualIcon fontSize="large" />
             </div>
             <div
-              className="create__icon"
-              className={(imgSrc || videoSrc) && "no__functionality"}
+              className={`${
+                (imgSrc || videoSrc) && "no__functionality"
+              } create__icon`}
               onClick={() => !videoSrc && !imgSrc && setEnterSrcVisible(true)}
             >
               <YouTubeIcon fontSize="large" />
             </div>
             <div
-              className="create__icon"
-              className={imgSrc && "no__functionality"}
+              className={`${
+                (imgSrc || videoSrc) && "no__functionality"
+              } create__icon`}
             >
               <NoteAddIcon fontSize="large" />
             </div>
           </div>
 
           <button
-            type="submit"
             style={
               !!input.trim() || imgSrc || videoSrc
                 ? {
@@ -258,6 +262,7 @@ const CreatePosts = ({
                   }
                 : null
             }
+            onClick={handlePostSubmit}
           >
             Post
           </button>

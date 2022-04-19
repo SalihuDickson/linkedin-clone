@@ -34,31 +34,44 @@ const Header = () => {
           <div className="main__logo">
             <img src="./images/linkedin.png" alt="Linkedin Logo" />
           </div>
-          <div className="nav__icon" style={{ gap: 0 }}>
+          <div
+            className="nav__icon no__functionality"
+            title="doesn't work"
+            style={{ gap: 0 }}
+          >
             <SearchIcon />
             <p>Search</p>
           </div>
-          <div className="nav__icon active">
+          <div className="nav__icon no__functionality" title="doesn't work">
             <HomeRoundedIcon className="icon" />
             <p>Home</p>
           </div>
-          <div className="nav__icon">
+          <div className="nav__icon no__functionality" title="doesn't work">
             <PeopleRoundedIcon className="icon" />
             <p>My Network</p>
           </div>
-          <div className="nav__icon">
-            <BusinessCenterRoundedIcon className="icon" />
-            <p>Jobs</p>
-          </div>
-          <div className="nav__icon">
-            <ChatRoundedIcon className="icon" />
-            <p>Messages</p>
-          </div>
-          <div className="nav__icon">
-            <NotificationsRoundedIcon className="icon" />
-            <p>Notifications</p>
-          </div>
-          <div className="nav__icon">
+          {width > 400 && (
+            <div className="nav__icon no__functionality" title="doesn't work">
+              <BusinessCenterRoundedIcon className="icon" />
+              <p>Jobs</p>
+            </div>
+          )}
+
+          {width > 400 && (
+            <div className="nav__icon no__functionality" title="doesn't work">
+              <ChatRoundedIcon className="icon" />
+              <p>Messages</p>
+            </div>
+          )}
+
+          {width > 400 && (
+            <div className="nav__icon no__functionality" title="doesn't work">
+              <NotificationsRoundedIcon className="icon" />
+              <p>Notifications</p>
+            </div>
+          )}
+
+          <div className="nav__icon no__functionality" title="doesn't work">
             <Avatar
               className="icon"
               style={{
@@ -84,33 +97,39 @@ const Header = () => {
             <div className="main__logo">
               <img src="./images/linkedin.png" alt="Linkedin Logo" />
             </div>
-            <form className="header__search">
-              <SearchIcon className="header__search-icon" />
+            <form
+              className="header__search no__functionality"
+              title="doesn't work"
+            >
+              <SearchIcon
+                className="header__search-icon no_functionality"
+                title="dosn't work"
+              />
               <input type="text" placeholder="Search" name="" id="" />
             </form>
           </div>
           <div className="header__right">
-            <div className="nav__icon active">
-              <HomeRoundedIcon className="icon" />
+            <div className="nav__icon no__functionality" title="doesn't work">
+              <HomeRoundedIcon className="icon " />
               <p>Home</p>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon no__functionality" title="doesn't work">
               <PeopleRoundedIcon className="icon" />
               <p>My Network</p>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon no__functionality" title="doesn't work">
               <BusinessCenterRoundedIcon className="icon" />
               <p>Jobs</p>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon no__functionality" title="doesn't work">
               <ChatRoundedIcon className="icon" />
               <p>Messages</p>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon no__functionality" title="doesn't work">
               <NotificationsRoundedIcon className="icon" />
               <p>Notifications</p>
             </div>
-            <div className="nav__icon">
+            <div className="nav__icon no__functionality" title="doesn't work">
               <Avatar
                 className="icon"
                 style={{

@@ -2,8 +2,8 @@ main {
   display: grid;
   grid-template-columns: 19% 48% 28%;
   width: 1134.9px;
-  margin: auto;
-  margin-top: 23px;
+  margin: 25px auto;
+  padding-bottom: 25px;
   gap: 22px;
   height: 100vh;
 }

@@ -25,7 +25,10 @@ const Widgets = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
               omnis.
             </p>
-            <button className="follow__btn">
+            <button
+              className="follow__btn no__functionality"
+              title="doesn't work"
+            >
               {" "}
               <AddRoundedIcon /> Follow
             </button>
@@ -42,7 +45,10 @@ const Widgets = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
               omnis.
             </p>
-            <button className="follow__btn">
+            <button
+              className="follow__btn no__functionality"
+              title="doesn't work"
+            >
               {" "}
               <AddRoundedIcon /> Follow
             </button>
@@ -59,7 +65,10 @@ const Widgets = () => {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
               omnis.
             </p>
-            <button className="follow__btn">
+            <button
+              className="follow__btn no__functionality"
+              title="doesn't work"
+            >
               {" "}
               <AddRoundedIcon /> Follow
             </button>

@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 import { db } from "../../../../../firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "@firebase/firestore";
 import { useSelector } from "react-redux";
+import useWindowSize from "../../../../../hooks/useWindowSize";
 
 const LikeBtn = ({ likesList, postId }) => {
   const { user } = useSelector((state) => state.user);
   const [liked, setLiked] = useState(false);
   const postRef = doc(db, "posts", postId);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     for (let i = 0; i < likesList.length; i++) {
@@ -58,7 +60,7 @@ const LikeBtn = ({ likesList, postId }) => {
       ) : (
         <ThumbUpAltOutlinedIcon style={{ transform: "scaleX(-1)" }} />
       )}{" "}
-      <p>Like</p>
+      {width > 440 && <p>Like</p>}
     </div>
   );
 };

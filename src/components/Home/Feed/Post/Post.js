@@ -13,7 +13,8 @@ import MoreBtn from "./MoreBtn/MoreBtn";
 import CommentSection from "./CommentSection/CommentSection";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import ReactPlayer from "react-player";
-import CloseIcon from "@material-ui/icons/Close";
+import useWindowSize from "../../../../hooks/useWindowSize";
+import { formatRelative } from "date-fns";
 
 const Post = ({
   postId,
@@ -26,11 +27,34 @@ const Post = ({
   avatar,
   likes,
   comments,
+  timestamp,
 }) => {
   const { user } = useSelector((state) => state.user);
   const [editVisible, setEditVisible, editRef, editClickableRef] =
     useClickedOutside(false);
   const [commentsVisible, setCommentsVisible] = useState(false);
+  const [timeDiff, setTimeDiff] = useState({
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
+    days: 0,
+  });
+
+  const { width } = useWindowSize();
+
+  useEffect(() => {
+    if (timestamp) {
+      const timePosted = timestamp.toDate();
+      const currentTime = new Date();
+
+      setTimeDiff(() => ({
+        seconds: getDifferenceInSeconds(currentTime, timePosted),
+        minutes: getDifferenceInMinutes(currentTime, timePosted),
+        hours: getDifferenceInHours(currentTime, timePosted),
+        days: getDifferenceInDays(currentTime, timePosted),
+      }));
+    }
+  }, [new Date().getSeconds()]);
 
   useEffect(() => {
     if (!editVisible) {
@@ -40,6 +64,8 @@ const Post = ({
       document.querySelector("html").style.overflow = "hidden";
     }
   }, [editVisible]);
+
+  const { seconds, minutes, hours, days } = timeDiff;
 
   return (
     <div className="post container">
@@ -63,8 +89,23 @@ const Post = ({
             <p className="name">{name}</p>
             <p className="job__desc">{jobDesc}</p>
             <div className="time__posted">
-              <p>now • </p>
-              <PublicIcon style={{ fontSize: 15 }} />
+              <p>
+                {seconds < 4
+                  ? "now•"
+                  : seconds < 60
+                  ? `${seconds}s ago•`
+                  : minutes < 60
+                  ? `${minutes}m ago•`
+                  : hours < 24
+                  ? `${hours}h ago•`
+                  : days < 4
+                  ? `${days}d ago•`
+                  : timestamp &&
+                    formatRelative(timestamp.toDate(), new Date()).replace(
+                      /\//g,
+                      "-"
+                    )}{" "}
+              </p>
             </div>
           </div>
         </div>
@@ -131,6 +172,81 @@ const Post = ({
                 {likes[2].name[0]}
               </Avatar>
             )}
+
+            {likes[3] && (
+              <Avatar
+                src="/static/images/avatar/3.jpg"
+                style={{
+                  width: 15,
+                  height: 15,
+                  fontSize: 10,
+                  textAlign: "center",
+                  verticalAlign: "center",
+                }}
+              >
+                {likes[3].name[0]}
+              </Avatar>
+            )}
+
+            {likes[3] && (
+              <Avatar
+                src="/static/images/avatar/3.jpg"
+                style={{
+                  width: 15,
+                  height: 15,
+                  fontSize: 10,
+                  textAlign: "center",
+                  verticalAlign: "center",
+                }}
+              >
+                {likes[3].name[0]}
+              </Avatar>
+            )}
+
+            {likes[4] && (
+              <Avatar
+                src="/static/images/avatar/3.jpg"
+                style={{
+                  width: 15,
+                  height: 15,
+                  fontSize: 10,
+                  textAlign: "center",
+                  verticalAlign: "center",
+                }}
+              >
+                {likes[4].name[0]}
+              </Avatar>
+            )}
+
+            {likes[5] && (
+              <Avatar
+                src="/static/images/avatar/3.jpg"
+                style={{
+                  width: 15,
+                  height: 15,
+                  fontSize: 10,
+                  textAlign: "center",
+                  verticalAlign: "center",
+                }}
+              >
+                {likes[5].name[0]}
+              </Avatar>
+            )}
+
+            {likes[6] && (
+              <Avatar
+                src="/static/images/avatar/3.jpg"
+                style={{
+                  width: 15,
+                  height: 15,
+                  fontSize: 10,
+                  textAlign: "center",
+                  verticalAlign: "center",
+                }}
+              >
+                {likes[6].name[0]}
+              </Avatar>
+            )}
           </AvatarGroup>
         </div>
       )}
@@ -141,10 +257,11 @@ const Post = ({
           onClick={() => setCommentsVisible((state) => !state)}
         >
           <CommentIcon />
-          <p>comment</p>
+          {width > 440 && <p>comment</p>}
         </div>
         <div title="doesn't work" className="feed__icon no__functionality">
-          <ArrowRightAltIcon /> <p>Share</p>
+          <ArrowRightAltIcon />
+          {width > 440 && <p>share</p>}
         </div>
         <SendBtn />
       </div>
@@ -160,3 +277,23 @@ const Post = ({
 };
 
 export default Post;
+
+function getDifferenceInDays(date1, date2) {
+  const diffInMs = Math.abs(date2 - date1);
+  return Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+}
+
+function getDifferenceInHours(date1, date2) {
+  const diffInMs = Math.abs(date2 - date1);
+  return Math.floor(diffInMs / (1000 * 60 * 60));
+}
+
+function getDifferenceInMinutes(date1, date2) {
+  const diffInMs = Math.abs(date2 - date1);
+  return Math.floor(diffInMs / (1000 * 60));
+}
+
+function getDifferenceInSeconds(date1, date2) {
+  const diffInMs = Math.abs(date2 - date1);
+  return Math.floor(diffInMs / 1000);
+}

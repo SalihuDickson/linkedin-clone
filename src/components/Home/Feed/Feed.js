@@ -11,13 +11,18 @@ import { postsRef, postsQuery } from "../../../firebase";
 import { onSnapshot, addDoc, serverTimestamp } from "@firebase/firestore";
 import { useSelector } from "react-redux";
 import useClickedOutside from "../../../hooks/useClickedOutside";
-import CloseIcon from "@material-ui/icons/Close";
 import CreatePost from "./CreatePost/CreatePost";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const Feed = () => {
   const photoRef = useRef();
+  const topRef = useRef();
+  const recentRef = useRef();
+  const { width } = useWindowSize();
+
   const { user } = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const [value, setValue] = useState(0);
   const [enterSrcVisible, setEnterSrcVisible] = useState(false);
   const [sortVisible, setSortVisible, sortRef] = useClickedOutside(false);
   const [createVisible, setCreateVisible, createRef, createClickable] =
@@ -53,6 +58,43 @@ const Feed = () => {
       subSnapshot();
     };
   }, []);
+
+  useEffect(() => {
+    handleSort();
+  }, [posts]);
+
+  const handleSort = (e) => {
+    if (e) {
+      if (topRef.current === e.target) {
+        topRef.current.classList.add("sorted");
+        recentRef.current.classList.remove("sorted");
+      } else if (recentRef.current === e.target) {
+        topRef.current.classList.remove("sorted");
+        recentRef.current.classList.add("sorted");
+      }
+    }
+
+    if (topRef.current.classList.contains("sorted")) {
+      setPosts(
+        posts.sort((b, a) => {
+          const aRank = a.data.comments.length + a.data.likes.length;
+          const bRank = b.data.comments.length + b.data.likes.length;
+
+          return aRank - bRank;
+        })
+      );
+    } else if (recentRef.current.classList.contains("sorted")) {
+      setPosts((posts) =>
+        posts.sort((b, a) => {
+          if (!a.data.timestamp) return;
+
+          return a.data.timestamp.toDate() - b.data.timestamp.toDate();
+        })
+      );
+    }
+
+    setValue(value + 1);
+  };
 
   return (
     <div className="feed">
@@ -100,7 +142,7 @@ const Feed = () => {
               style={{ display: "none" }}
             />
             <PhotoSizeSelectActualIcon style={{ color: "#70b5f9" }} />
-            <p>Photo</p>
+            {width > 440 && <p>Photo</p>}
           </div>
           <div
             className="feed__icon"
@@ -110,15 +152,15 @@ const Feed = () => {
             }}
           >
             <YouTubeIcon style={{ color: "#7fc15e" }} />
-            <p>Video</p>
+            {width > 440 && <p>Video</p>}
           </div>
-          <div className="feed__icon">
-            <EventIcon style={{ color: "#e7a33e" }} />
-            <p>Event</p>
+          <div className="feed__icon no__functionality" title="doesn't work">
+            <EventIcon />
+            {width > 440 && <p>Event</p>}
           </div>
-          <div className="feed__icon">
-            <NoteAddIcon style={{ color: "#fc9295" }} />
-            <p>Write Article</p>
+          <div className="feed__icon no__functionality">
+            <NoteAddIcon title="doesn't work" />
+            {width > 440 && <p>Write Article</p>}
           </div>
         </div>
       </div>
@@ -135,12 +177,22 @@ const Feed = () => {
             >
               Top <ArrowDropDownIcon style={{ cursor: "pointer" }} />
             </span>
-            {sortVisible && (
-              <div className="sort__options container" ref={sortRef}>
-                <div className="option">Top</div>
-                <div className="option">Recent</div>
+            <div
+              className="sort__options container"
+              style={sortVisible ? { display: "block" } : { display: "none" }}
+              ref={sortRef}
+            >
+              <div className="option" ref={topRef} onClick={handleSort}>
+                Top
               </div>
-            )}
+              <div
+                className="option sorted"
+                ref={recentRef}
+                onClick={handleSort}
+              >
+                Recent
+              </div>
+            </div>
           </div>{" "}
         </div>
       </div>
@@ -159,6 +211,7 @@ const Feed = () => {
               avatar,
               likes,
               comments,
+              timestamp,
             },
           }) => (
             <Post
@@ -173,6 +226,7 @@ const Feed = () => {
               avatar={avatar}
               likes={likes}
               comments={comments}
+              timestamp={timestamp}
             />
           )
         )}

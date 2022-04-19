@@ -77,11 +77,27 @@
   padding: 15px 16px;
 }
 
+@media screen and (max-width: 460px) {
+  .post .icons {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .post .icons {
+    width: 90%;
+    margin: auto;
+  }
+}
+
 .post__icons .feed__icon {
   gap: 6.5px;
   margin-bottom: 0;
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .post .more {
